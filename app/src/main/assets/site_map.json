@@ -606,6 +606,10 @@
       {
         "title": "自定义圆形带进度提示的 loading 控件",
         "url": ".view.custom.MyLoadingDemo1"
+      },
+      {
+        "title": "自定义NumberPicker控件(继承LinearLayout, 绘制数字)",
+        "url": ".view.custom.CustomNumberPickerDemo"
       }
     ]
   },

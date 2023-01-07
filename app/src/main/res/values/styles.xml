@@ -5,6 +5,8 @@
         引用示例参见 AndroidManifest.xml（作用于整个 application）
     -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="BridgeTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge" />
     <!--
         继承上面的 AppTheme 主题，即继承 Theme.AppCompat.Light.DarkActionBar 主题，并重写其中的一些样式（关于修改主题中指定控件的默认样式请参见 ui/ThemeDemo3）
         引用示例参见 ui/ThemeDemo1

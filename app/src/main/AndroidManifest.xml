@@ -19,7 +19,7 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/BridgeTheme">
         <activity android:name=".jetpack.lifecycle.LifecycleDemo" />
         <activity android:name=".jetpack.lifecycle.LiveDataDemo" />
         <activity android:name=".jetpack.lifecycle.LiveDataDemo2" />
@@ -73,6 +73,7 @@
         <activity android:name=".view.layout.ContentViewDemo1" />
         <activity android:name=".view.layout.InflateDemo1" />
         <activity android:name=".view.layout.IncludeDemo1" />
+        <activity android:name=".view.custom.CustomNumberPickerDemo" />
         <activity android:name=".input.KeyDemo1" />
         <activity android:name=".ipc.ClipboardDemo1" />
         <activity android:name=".java.CallbackDemo1" />

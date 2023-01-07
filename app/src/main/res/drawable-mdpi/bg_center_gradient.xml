@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="230dp"><!--此处设置width才有效,仅size中设置width蓝色仍会到右边 -->
+        <shape>
+            <size
+                android:height="42dp"
+                android:width="230dp" />
+            <gradient android:type="linear"
+                android:angle="-180"
+                android:startColor="@color/black_percent_10"
+                android:endColor="@android:color/transparent"
+                />
+        </shape>
+    </item>
+    <item android:start="230dp" android:width="230dp">
+        <shape>
+            <size
+                android:height="42dp"
+                android:width="230dp" />
+            <gradient android:type="linear"
+                android:angle="0"
+                android:startColor="@color/black_percent_10"
+                android:endColor="@android:color/transparent"
+                />
+        </shape>
+    </item>
+
+</layer-list>

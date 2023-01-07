@@ -147,4 +147,14 @@
     <color name="navy">#000080</color><!--海军色 -->
     <color name="black">#000000</color><!--黑色 -->
     <color name="transparent">#0000</color><!--透明 -->
+    <color name="light_white">#10FFFFFF</color>
+    <color name="light_black">#1A000000</color>
+    <color name="white_percent_90">#E5FFFFFF</color>
+    <color name="gray2">#FFDDDDDD</color>
+    <color name="orange2">#FE8103</color>
+    <color name="black_333">#333333</color>
+    <color name="gray_999">#999999</color>
+    <color name="gray_alpha_80">#CCFFFFFF</color>
+    <color name="black_back">#1C2630</color>
+    <color name="black_percent_10">#1AFFFFFF</color>
 </resources>

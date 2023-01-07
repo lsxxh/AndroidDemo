@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="495dp"
+    android:layout_height="359dp"
+    android:paddingTop="16dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_datetime_set"
+    >
+
+    <include layout="@layout/back_title"/>
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:id="@+id/rvTimeSet"-->
+    <!--        />-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="248dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_center_gradient" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            >
+            <com.webabcd.androiddemo.view.custom.CustomNumberPicker
+                android:id="@+id/np_hour"
+                android:layout_width="200dp"
+                android:layout_height="match_parent" />
+            <com.webabcd.androiddemo.view.custom.CustomNumberPicker
+                android:id="@+id/np_minute"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="53dp" />
+            <!--android:background="@null"隐藏divider无效-->
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="245dp"
+            android:text="@string/cancel"
+            android:textColor="@color/orange"
+            android:background="@drawable/btn_frame_orange"
+            />
+        <Button
+            android:id="@+id/btnConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/confirm"
+            android:textColor="@color/orange"
+            android:background="@drawable/btn_frame_orange"
+            />
+
+    </LinearLayout>
+</LinearLayout>
