@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.ViewConfiguration
 import android.widget.LinearLayout
+import java.util.*
 
 private const val DEFAULT_ITEM_HEIGHT = 80
 private const val TEXT_GAP = 30
@@ -81,12 +82,15 @@ class CustomNumberPicker : LinearLayout {
 
     override fun scrollBy(x: Int, y: Int) {
         super.scrollBy(x, y)
+        Log.d("yyz", "y: $y, mCurrentScrollOffset: $mCurrentScrollOffset, mInitOffset: $mInitOffset, mCurrentScrollOffset - mInitOffset: ${mCurrentScrollOffset - mInitOffset}")
         if (y > 0) {
             if (mCurrentScrollOffset - mInitOffset > DEFAULT_ITEM_HEIGHT + TEXT_GAP) {
                 decreaseNum()
             }
         } else {
-            if (mCurrentScrollOffset - mInitOffset > DEFAULT_ITEM_HEIGHT + TEXT_GAP) {
+            //y < 0是往上翻,向下滚动,mCurrentScrollOffset(手指滑动距离,上+下-)减小(+->-)
+            //if (mCurrentScrollOffset - mInitOffset > DEFAULT_ITEM_HEIGHT + TEXT_GAP) {
+            if (mInitOffset - mCurrentScrollOffset > DEFAULT_ITEM_HEIGHT + TEXT_GAP) {
                 increaseNum()
             }
         }
@@ -97,6 +101,7 @@ class CustomNumberPicker : LinearLayout {
             mNumbers[i] = mNumbers[i + 1]
             mNumbers[mNumbers.size - 1] = mNumbers[0]
         }
+        Log.d("yyz", "#increaseNum mNumbers.contentToString(): ${mNumbers.contentToString()}")
     }
 
     private fun decreaseNum() {
@@ -105,6 +110,7 @@ class CustomNumberPicker : LinearLayout {
             mNumbers[i] = mNumbers[i - 1]
             mNumbers[0] = end
         }
+        Log.d("yyz", "#decreaseNum mNumbers.contentToString(): ${mNumbers.contentToString()}")
     }
 
     /* override fun computeScroll() {
