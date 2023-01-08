@@ -610,6 +610,10 @@
       {
         "title": "自定义NumberPicker控件(继承LinearLayout, 绘制数字)",
         "url": ".view.custom.CustomNumberPickerDemo"
+      },
+      {
+        "title": "ScrollByOrToView-使用scrollTo、scrollBy实现滚动",
+        "url": ".view.custom.ScrollByOrToViewDemo"
       }
     ]
   },

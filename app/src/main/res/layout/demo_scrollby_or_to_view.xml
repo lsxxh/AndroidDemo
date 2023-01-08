@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:orientation="vertical">
+
+        <com.webabcd.androiddemo.view.custom.ScrollByOrToView
+            android:id="@+id/scrollTouchView"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:background="#ff723d"
+            android:gravity="center"
+            android:text="Touch区(ScrollByOrToView)"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:background="#80008800"
+            android:gravity="center"
+            android:text="我是一个参照物，我和滚动布局在同一个父容器"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@color/cyan"
+        android:text="我和滚动布局的父布局平级，\n用来区分平移。\n使用scrollBy和scrollTo滑动，\n移动的是所在的父容器"
+        android:textColor="@color/black"
+        android:textSize="12dp" />
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/cyan"
+        android:layout_gravity="center"
+        android:text="演示方法:手指拖拽Touch区,会移动父容器(父同级(蓝)不动),表现为橙、青区域跟随,松开手指会scrollTo(0, 0)"
+        />
+
+</FrameLayout>

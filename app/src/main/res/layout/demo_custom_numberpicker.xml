@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="495dp"
+    android:layout_height="359dp"
     android:paddingTop="16dp"
     android:orientation="vertical"
     android:background="@drawable/bg_datetime_set"
     >
-    <!--    android:layout_width="495dp"-->
-    <!--    android:layout_height="359dp"-->
 
     <include layout="@layout/back_title"/>
 
