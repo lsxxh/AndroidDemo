@@ -10,8 +10,8 @@ import android.view.MotionEvent
 import android.view.ViewConfiguration
 import android.widget.LinearLayout
 
-private const val DEFAULT_ITEM_HEIGHT = 50
-private const val TEXT_GAP = 10
+private const val DEFAULT_ITEM_HEIGHT = 80
+private const val TEXT_GAP = 30
 
 class CustomNumberPicker : LinearLayout {
     private var mInitOffset: Int = 0
@@ -26,9 +26,11 @@ class CustomNumberPicker : LinearLayout {
     constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
     constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int) : super(context, attributeSet, defStyleAttr){
         setWillNotDraw(false)
-        mTextPaint.isAntiAlias = true
-        mTextPaint.color = Color.BLACK
-        mTextPaint.textSize = 50f
+        mTextPaint.apply {
+            isAntiAlias = true
+            color = Color.BLACK
+            textSize = 50f
+        }
         mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
         isVerticalFadingEdgeEnabled = true
     }
