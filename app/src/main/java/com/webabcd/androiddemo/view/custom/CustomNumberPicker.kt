@@ -76,6 +76,7 @@ class CustomNumberPicker : LinearLayout {
                 Log.d("yyz", "y: $y, mLastY: $mLastY")
                 mCurrentScrollOffset += y - mLastY
                 (this.parent as ViewGroup).scrollBy(0, y - mLastY)
+                Log.d("yyz", "(offset) y-mLastY: ${y - mLastY}")
                 invalidate()
                 mLastX = x
                 mLastY = y
