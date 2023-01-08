@@ -115,6 +115,7 @@ class CustomNumberPicker : LinearLayout {
             mNumbers[i] = mNumbers[i - 1]
             mNumbers[0] = end
         }
+        //?2:前2会重复#decreaseNum mNumbers.contentToString(): [13, 13, 14, 15, 16, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
         Log.d("yyz", "#decreaseNum mNumbers.contentToString(): ${mNumbers.contentToString()}")
     }
 
