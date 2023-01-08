@@ -75,6 +75,7 @@
         <activity android:name=".view.layout.IncludeDemo1" />
         <activity android:name=".view.custom.CustomNumberPickerDemo" />
         <activity android:name=".view.custom.ScrollByOrToViewDemo" />
+        <activity android:name=".view.custom.ScrollerViewDemo" />
         <activity android:name=".input.KeyDemo1" />
         <activity android:name=".ipc.ClipboardDemo1" />
         <activity android:name=".java.CallbackDemo1" />

@@ -5,22 +5,22 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" 
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.webabcd.androiddemo.view.custom.ScrollByOrToView
+        <com.webabcd.androiddemo.view.custom.ScrollerView
             android:id="@+id/scrollTouchView"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:background="#ff723d"
             android:gravity="center"
-            android:text="Touch区(ScrollByOrToView)"
+            android:text="Touch区(ScrollerView)"
             android:textColor="@android:color/white"
             android:textSize="12dp" />
 
         <TextView
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:background="#80008800"
             android:gravity="center"
             android:text="我是一个参照物，我和滚动布局在同一个父容器"
@@ -44,7 +44,8 @@
         android:padding="10dp"
         android:background="@color/cyan"
         android:layout_gravity="center"
-        android:text="演示方法:手指拖拽Touch区,会移动父容器(父同级(蓝)不动),表现为橙、青区域跟随,松开手指会scrollTo(0, 0)"
+        android:text="演示方法:手指拖拽Touch区,会移动父容器(父同级(蓝)不动),表现为橙、青区域跟随,松开手指会mScroller.startScroll( viewGroup.scrollX, viewGroup.scrollY, -viewGroup.scrollX, -viewGroup.scrollY, 1000
+)前两个是负值(-距左上角的滚动偏移),后2个加-变正(向左/上为正)不再瞬间移动"
         />
 
 </FrameLayout>

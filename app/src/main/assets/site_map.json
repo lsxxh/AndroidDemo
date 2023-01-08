@@ -614,6 +614,10 @@
       {
         "title": "ScrollByOrToView-使用scrollTo、scrollBy实现滚动",
         "url": ".view.custom.ScrollByOrToViewDemo"
+      },
+      {
+        "title": "ScrollerView-用Scroller实现View滚动,异于ScrollTo瞬间滚动",
+        "url": ".view.custom.ScrollerViewDemo"
       }
     ]
   },
