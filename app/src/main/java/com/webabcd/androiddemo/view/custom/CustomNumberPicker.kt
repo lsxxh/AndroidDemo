@@ -97,10 +97,15 @@ class CustomNumberPicker : LinearLayout {
     }
 
     private fun increaseNum() {
+        val start = mNumbers[0] //#1
         for (i in 0 until mNumbers.size - 1) {
             mNumbers[i] = mNumbers[i + 1]
-            mNumbers[mNumbers.size - 1] = mNumbers[0]
+            //mNumbers[mNumbers.size - 1] = mNumbers[0]
+            mNumbers[mNumbers.size - 1] = start
         }
+        //#increaseNum mNumbers.contentToString(): [13, 14, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 13]
+        //#increaseNum mNumbers.contentToString(): [14, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14]
+        //#1优化后#increaseNum mNumbers.contentToString(): [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1, 1]
         Log.d("yyz", "#increaseNum mNumbers.contentToString(): ${mNumbers.contentToString()}")
     }
 
