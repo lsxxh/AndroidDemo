@@ -78,7 +78,7 @@ public class CustomView2 extends ViewGroup {
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
+        
         int width = 0;
         int height = 0;
 
