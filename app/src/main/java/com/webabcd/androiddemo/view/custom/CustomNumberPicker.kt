@@ -120,9 +120,10 @@ class CustomNumberPicker : LinearLayout {
     }
 
     private fun updateRect() {
+        Log.d("yyz", "#updateRect measuredHeight: $measuredHeight") //yyz: #updateRect measuredHeight: 682(不变)
         if (isMiddleGradient) {
-            mMiddleGradientRect = Rect(0, measuredHeight / 2 - DEFAULT_ITEM_HEIGHT / 2,
-                measuredWidth, measuredHeight / 2 + DEFAULT_ITEM_HEIGHT / 2)
+            mMiddleGradientRect = Rect(0, top + measuredHeight / 2 - DEFAULT_ITEM_HEIGHT / 2,
+                measuredWidth, top + measuredHeight / 2 + DEFAULT_ITEM_HEIGHT / 2)
         }
     }
 
