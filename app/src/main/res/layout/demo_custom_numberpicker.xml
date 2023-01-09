@@ -32,13 +32,17 @@
             >
             <com.webabcd.androiddemo.view.custom.CustomNumberPicker
                 android:id="@+id/np_hour"
-                android:layout_width="200dp"
-                android:layout_height="match_parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/red"
+                />
             <com.webabcd.androiddemo.view.custom.CustomNumberPicker
                 android:id="@+id/np_minute"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="53dp" />
+                android:layout_marginStart="53dp"
+                android:background="@color/red"
+                />
             <!--android:background="@null"隐藏divider无效-->
         </LinearLayout>
     </RelativeLayout>

@@ -15,25 +15,36 @@ private const val DEFAULT_ITEM_COUNT = 5
 class CustomNumberPicker : LinearLayout {
     private var gap = 30
 
+    private var mMaxValue = 12
+    private var mMinValue = 0
+
     private var mInitOffset: Int = 0
     private var mCurrentScrollOffset = 0
     private val mTextPaint = Paint()
-    private var mTouchSlop: Int
-    private val mNumbers = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
+    private var mTouchSlop = 0
+    private val mNumbers = arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
     private val mWidth = 400
     private val x = mWidth / 2
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
     constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int) : super(context, attributeSet, defStyleAttr){
+        init()
+        initPaint()
+    }
+
+    private fun init() {
         setWillNotDraw(false)
+        mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
+        isVerticalFadingEdgeEnabled = true
+    }
+
+    private fun initPaint() {
         mTextPaint.apply {
             isAntiAlias = true
             color = Color.BLACK
             textSize = 50f
         }
-        mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
-        isVerticalFadingEdgeEnabled = true
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -58,22 +69,36 @@ class CustomNumberPicker : LinearLayout {
     }
 
     private fun measureHeight(defaultHeight: Int, heightMeasureSpec: Int): Int {
-        TODO("Not yet implemented")
+        var defaultH = 0
+        val specMode = MeasureSpec.getMode(heightMeasureSpec)
+        val specSize = MeasureSpec.getSize(heightMeasureSpec)
+        Log.d("yyz", "#measureHeight specMode: $specMode, specSize: $specSize")
+        when (specMode) {
+            MeasureSpec.EXACTLY -> defaultH = specSize
+            MeasureSpec.UNSPECIFIED -> defaultH = defaultHeight.coerceAtLeast(specSize)
+            MeasureSpec.AT_MOST -> defaultH = DEFAULT_ITEM_COUNT * DEFAULT_ITEM_HEIGHT + paddingTop + paddingBottom
+        }
+        return defaultH
     }
 
     private fun measureWidth(defaultWidth: Int, widthMeasureSpec: Int): Int {
-        var defaultW: Int
+        var defaultW = 0
         val specMode = MeasureSpec.getMode(widthMeasureSpec)
         val specSize = MeasureSpec.getSize(widthMeasureSpec)
-        Log.d("yyz", "specMode: $specMode, specSize: $specSize")
+        Log.d("yyz", "#measureWidth specMode: $specMode, specSize: $specSize")
         when (specMode) {
             MeasureSpec.EXACTLY -> defaultW = specSize
             //Should be replaced with Kotlin function
             //MeasureSpec.UNSPECIFIED -> defaultW = Math.max(defaultWidth, specSize)
             MeasureSpec.UNSPECIFIED -> defaultW = defaultWidth.coerceAtLeast(specSize)
+            MeasureSpec.AT_MOST -> defaultW = mTextPaint.measureText(mMaxValue.toString()).toInt() + paddingStart + paddingEnd
         }
+        return defaultW
     }
-
+    //coerceAtLeast definition:
+    //public fun Int.coerceAtLeast(minimumValue: Int): Int {
+    //    return if (this < minimumValue) minimumValue else this
+    //}
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
         return true
     }
@@ -163,5 +188,13 @@ class CustomNumberPicker : LinearLayout {
 
     override fun getBottomFadingEdgeStrength(): Float {
         return 1f
+    }
+
+    fun setMaxValue(maxValue: Int) {
+        mMaxValue = maxValue
+    }
+
+    fun setMinValue(minValue: Int) {
+        mMinValue = minValue
     }
 }
