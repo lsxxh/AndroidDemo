@@ -1,9 +1,8 @@
 package com.webabcd.androiddemo.view.custom
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
+import android.graphics.Color.parseColor
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -16,9 +15,17 @@ private const val TEXT_SIZE = 50f
 //private const val MIDDLE_TEXT_SIZE = 50f
 private const val MIDDLE_TEXT_SCALE = 1.5f
 
+//Const 'val' has type 'Drawable'. Only primitives and String are allowed
+//private const val MIDDLE_HIGHLIGHT_DRAWABLE = Drawable()
+
+//Const 'val' should not have a delegate
+private val BACKGROUND_MIDDLE_COLOR_MIDDLE_DEFAULT by lazy { parseColor("#FFFF0000") }
+private val BACKGROUND_MIDDLE_COLOR_START_DEFAULT by lazy { parseColor("#00000000")}
+private val BACKGROUND_MIDDLE_COLOR_END_DEFAULT by lazy { parseColor("#00000000")}
+
 class CustomNumberPicker : LinearLayout {
     private var gap = 30
-    private val middle_item_index = (DEFAULT_ITEM_COUNT - 1) / 2
+    private val middleItemIndex = (DEFAULT_ITEM_COUNT - 1) / 2
 
     private var mMaxValue = 12
     private var mMinValue = 0
@@ -54,10 +61,18 @@ class CustomNumberPicker : LinearLayout {
             color = Color.BLACK
             textSize = 50f
         }
+
+        Log.d("yyz", "mHeight: $mHeight")
+        val y = mHeight / 2
+        val backgroundGradient = LinearGradient(0f, y.toFloat(), mWidth.toFloat(), y.toFloat(),
+            intArrayOf(BACKGROUND_MIDDLE_COLOR_START_DEFAULT, BACKGROUND_MIDDLE_COLOR_MIDDLE_DEFAULT, BACKGROUND_MIDDLE_COLOR_END_DEFAULT),
+            null, Shader.TileMode.CLAMP
+        )
         mMiddleTextPaint.apply {
             isAntiAlias = true
             color = Color.BLACK
             textSize = TEXT_SIZE * MIDDLE_TEXT_SCALE
+            shader = backgroundGradient
         }
     }
 
@@ -71,9 +86,14 @@ class CustomNumberPicker : LinearLayout {
             y += DEFAULT_ITEM_HEIGHT + gap
         }*/
         for (index in mNumbers.indices) {
-            if (index != middle_item_index) {
+            if (index != middleItemIndex) {
                 canvas.drawText(mNumbers[index].toString(), x.toFloat(), y.toFloat(), mTextPaint)
             } else {
+                //Avoid object allocations during draw/layout operations (preallocate and reuse instead)
+                /*val backgroundGradient = LinearGradient(0f, y.toFloat(), mWidth.toFloat(), y.toFloat(),
+                    intArrayOf(BACKGROUND_MIDDLE_COLOR_START_DEFAULT, BACKGROUND_MIDDLE_COLOR_MIDDLE_DEFAULT, BACKGROUND_MIDDLE_COLOR_END_DEFAULT),
+                    null, Shader.TileMode.CLAMP
+                )*/
                 canvas.drawText(mNumbers[index].toString(), x.toFloat(), y.toFloat(), mMiddleTextPaint)
             }
             y += DEFAULT_ITEM_HEIGHT + gap
