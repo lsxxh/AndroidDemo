@@ -50,6 +50,7 @@ class CustomNumberPicker : LinearLayout {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        val x = mWidth / 2
         var y = mCurrentScrollOffset
         for (num in mNumbers) {
             canvas.drawText(num.toString(), x.toFloat(), y.toFloat(), mTextPaint)
