@@ -19,9 +19,9 @@ private const val MIDDLE_TEXT_SCALE = 1.5f
 //private const val MIDDLE_HIGHLIGHT_DRAWABLE = Drawable()
 
 //Const 'val' should not have a delegate
-private val BACKGROUND_MIDDLE_COLOR_MIDDLE_DEFAULT by lazy { parseColor("#FFFF0000") }
-private val BACKGROUND_MIDDLE_COLOR_START_DEFAULT by lazy { parseColor("#00000000")}
-private val BACKGROUND_MIDDLE_COLOR_END_DEFAULT by lazy { parseColor("#00000000")}
+private val BACKGROUND_MIDDLE_COLOR_MIDDLE_DEFAULT by lazy { parseColor("#FF0000") }
+private val BACKGROUND_MIDDLE_COLOR_START_DEFAULT by lazy { parseColor("#000000")}
+private val BACKGROUND_MIDDLE_COLOR_END_DEFAULT by lazy { parseColor("#000000")}
 
 class CustomNumberPicker : LinearLayout {
     private var gap = 30
