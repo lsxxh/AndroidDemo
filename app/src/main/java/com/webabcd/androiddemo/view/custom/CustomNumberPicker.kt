@@ -24,6 +24,9 @@ private val BACKGROUND_MIDDLE_COLOR_START_DEFAULT by lazy { parseColor("#0000000
 private val BACKGROUND_MIDDLE_COLOR_END_DEFAULT by lazy { parseColor("#00000000")}
 
 class CustomNumberPicker : LinearLayout {
+    private val isMiddleGradient = true
+    private lateinit var mMiddleGradientRect: Rect
+    private lateinit var mBackgroundGradient: LinearGradient
     private var gap = 30
     private val middleItemIndex = (DEFAULT_ITEM_COUNT - 1) / 2
 
@@ -62,17 +65,12 @@ class CustomNumberPicker : LinearLayout {
             textSize = 50f
         }
 
-        Log.d("yyz", "mHeight: $mHeight") //yyz: mHeight: 800
-        val y = measuredHeight / 2
-        val backgroundGradient = LinearGradient(0f, y.toFloat(), measuredWidth.toFloat(), y.toFloat(),
-            intArrayOf(BACKGROUND_MIDDLE_COLOR_START_DEFAULT, BACKGROUND_MIDDLE_COLOR_MIDDLE_DEFAULT, BACKGROUND_MIDDLE_COLOR_END_DEFAULT),
-            null, Shader.TileMode.CLAMP
-        )
+        Log.d("yyz", "mHeight: $mHeight") //yyz: mHeight: 800说明调用在onMeasure之前
+
         mMiddleTextPaint.apply {
             isAntiAlias = true
             color = Color.BLACK
             textSize = TEXT_SIZE * MIDDLE_TEXT_SCALE
-            shader = backgroundGradient
         }
     }
 
@@ -96,8 +94,11 @@ class CustomNumberPicker : LinearLayout {
                 )*/
                 canvas.drawText(mNumbers[index].toString(), x.toFloat(), y.toFloat(), mMiddleTextPaint)
                 val textWidth = mMiddleTextPaint.measureText(mNumbers[index].toString()).toInt()
-                canvas.drawRect(0f, (measuredHeight / 2 - DEFAULT_ITEM_HEIGHT / 2).toFloat(),
-                    measuredWidth.toFloat(), (measuredHeight / 2 + DEFAULT_ITEM_HEIGHT / 2).toFloat(), mMiddleTextPaint)
+
+                if (isMiddleGradient) {
+                    mMiddleTextPaint.shader = mBackgroundGradient
+                    canvas.drawRect(mMiddleGradientRect, mMiddleTextPaint)
+                }
             }
             y += DEFAULT_ITEM_HEIGHT + gap
         }
@@ -114,6 +115,24 @@ class CustomNumberPicker : LinearLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         setMeasuredDimension(measureWidth(suggestedMinimumWidth, widthMeasureSpec),
             measureHeight(suggestedMinimumHeight, heightMeasureSpec))
+        updateRect()
+        initGradient()
+    }
+
+    private fun updateRect() {
+        if (isMiddleGradient) {
+            mMiddleGradientRect = Rect(0, measuredHeight / 2 - DEFAULT_ITEM_HEIGHT / 2,
+                measuredWidth, measuredHeight / 2 + DEFAULT_ITEM_HEIGHT / 2)
+        }
+    }
+
+    private fun initGradient() {
+        if (!isMiddleGradient) return
+        val y = measuredHeight / 2
+        mBackgroundGradient = LinearGradient(0f, y.toFloat(), measuredWidth.toFloat(), y.toFloat(),
+            intArrayOf(BACKGROUND_MIDDLE_COLOR_START_DEFAULT, BACKGROUND_MIDDLE_COLOR_MIDDLE_DEFAULT, BACKGROUND_MIDDLE_COLOR_END_DEFAULT),
+            null, Shader.TileMode.CLAMP
+        )
     }
 
     private fun measureHeight(defaultHeight: Int, heightMeasureSpec: Int): Int {
