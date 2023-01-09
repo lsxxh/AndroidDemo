@@ -25,6 +25,7 @@ class CustomNumberPicker : LinearLayout {
     private val mNumbers = arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 
     private var mWidth = 200
+    private var mHeight = 800
     //private val x = mWidth / 2
 
     constructor(context: Context) : this(context, null)
@@ -36,6 +37,7 @@ class CustomNumberPicker : LinearLayout {
 
     private fun init() {
         setWillNotDraw(false)
+        setPadding(20, 0, 20, 0)
         mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
         isVerticalFadingEdgeEnabled = true
     }
@@ -52,7 +54,7 @@ class CustomNumberPicker : LinearLayout {
         super.onDraw(canvas)
         val x = mWidth / 2
         var y = mCurrentScrollOffset
-
+        val gap = (mHeight - DEFAULT_ITEM_HEIGHT * DEFAULT_ITEM_COUNT) / (DEFAULT_ITEM_COUNT - 1)
         for (num in mNumbers) {
             canvas.drawText(num.toString(), x.toFloat(), y.toFloat(), mTextPaint)
             y += DEFAULT_ITEM_HEIGHT + gap
@@ -79,8 +81,9 @@ class CustomNumberPicker : LinearLayout {
         when (specMode) {
             MeasureSpec.EXACTLY -> defaultH = specSize
             MeasureSpec.UNSPECIFIED -> defaultH = defaultHeight.coerceAtLeast(specSize)
-            MeasureSpec.AT_MOST -> defaultH = DEFAULT_ITEM_COUNT * DEFAULT_ITEM_HEIGHT + paddingTop + paddingBottom
+            MeasureSpec.AT_MOST -> defaultH = DEFAULT_ITEM_COUNT * DEFAULT_ITEM_HEIGHT + (DEFAULT_ITEM_COUNT - 1) * gap + paddingTop + paddingBottom
         }
+        mHeight = defaultH
         Log.d("yyz", "defaultH: $defaultH")
         return defaultH
     }
