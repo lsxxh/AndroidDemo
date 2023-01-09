@@ -19,9 +19,9 @@ private const val MIDDLE_TEXT_SCALE = 1.5f
 //private const val MIDDLE_HIGHLIGHT_DRAWABLE = Drawable()
 
 //Const 'val' should not have a delegate
-private val BACKGROUND_MIDDLE_COLOR_MIDDLE_DEFAULT by lazy { parseColor("#FF0000") }
-private val BACKGROUND_MIDDLE_COLOR_START_DEFAULT by lazy { parseColor("#000000")}
-private val BACKGROUND_MIDDLE_COLOR_END_DEFAULT by lazy { parseColor("#000000")}
+private val BACKGROUND_MIDDLE_COLOR_MIDDLE_DEFAULT by lazy { parseColor("#99FFD700") } //#FFD700: <!--金色 -->
+private val BACKGROUND_MIDDLE_COLOR_START_DEFAULT by lazy { parseColor("#00000000")}
+private val BACKGROUND_MIDDLE_COLOR_END_DEFAULT by lazy { parseColor("#00000000")}
 
 class CustomNumberPicker : LinearLayout {
     private var gap = 30
@@ -62,9 +62,9 @@ class CustomNumberPicker : LinearLayout {
             textSize = 50f
         }
 
-        Log.d("yyz", "mHeight: $mHeight")
-        val y = mHeight / 2
-        val backgroundGradient = LinearGradient(0f, y.toFloat(), mWidth.toFloat(), y.toFloat(),
+        Log.d("yyz", "mHeight: $mHeight") //yyz: mHeight: 800
+        val y = measuredHeight / 2
+        val backgroundGradient = LinearGradient(0f, y.toFloat(), measuredWidth.toFloat(), y.toFloat(),
             intArrayOf(BACKGROUND_MIDDLE_COLOR_START_DEFAULT, BACKGROUND_MIDDLE_COLOR_MIDDLE_DEFAULT, BACKGROUND_MIDDLE_COLOR_END_DEFAULT),
             null, Shader.TileMode.CLAMP
         )
@@ -96,7 +96,8 @@ class CustomNumberPicker : LinearLayout {
                 )*/
                 canvas.drawText(mNumbers[index].toString(), x.toFloat(), y.toFloat(), mMiddleTextPaint)
                 val textWidth = mMiddleTextPaint.measureText(mNumbers[index].toString()).toInt()
-                canvas.drawRect(0f, (mHeight / 2 - textWidth / 2).toFloat(), mWidth.toFloat(), (mHeight / 2 + textWidth / 2).toFloat(), mMiddleTextPaint)
+                canvas.drawRect(0f, (measuredHeight / 2 - DEFAULT_ITEM_HEIGHT / 2).toFloat(),
+                    measuredWidth.toFloat(), (measuredHeight / 2 + DEFAULT_ITEM_HEIGHT / 2).toFloat(), mMiddleTextPaint)
             }
             y += DEFAULT_ITEM_HEIGHT + gap
         }
