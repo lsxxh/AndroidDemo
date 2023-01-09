@@ -24,8 +24,8 @@ class CustomNumberPicker : LinearLayout {
     private var mTouchSlop = 0
     private val mNumbers = arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 
-    private val mWidth = 400
-    private val x = mWidth / 2
+    private var mWidth = 200
+    //private val x = mWidth / 2
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
@@ -79,6 +79,7 @@ class CustomNumberPicker : LinearLayout {
             MeasureSpec.UNSPECIFIED -> defaultH = defaultHeight.coerceAtLeast(specSize)
             MeasureSpec.AT_MOST -> defaultH = DEFAULT_ITEM_COUNT * DEFAULT_ITEM_HEIGHT + paddingTop + paddingBottom
         }
+        Log.d("yyz", "defaultH: $defaultH")
         return defaultH
     }
 
@@ -94,6 +95,8 @@ class CustomNumberPicker : LinearLayout {
             MeasureSpec.UNSPECIFIED -> defaultW = defaultWidth.coerceAtLeast(specSize)
             MeasureSpec.AT_MOST -> defaultW = mTextPaint.measureText(mMaxValue.toString()).toInt() + paddingStart + paddingEnd
         }
+        mWidth = defaultW
+        Log.d("yyz", "defaultW: $defaultW")
         return defaultW
     }
     //coerceAtLeast definition:
