@@ -95,6 +95,8 @@ class CustomNumberPicker : LinearLayout {
                     null, Shader.TileMode.CLAMP
                 )*/
                 canvas.drawText(mNumbers[index].toString(), x.toFloat(), y.toFloat(), mMiddleTextPaint)
+                val textWidth = mMiddleTextPaint.measureText(mNumbers[index].toString()).toInt()
+                canvas.drawRect(0f, (mHeight / 2 - textWidth / 2).toFloat(), mWidth.toFloat(), (mHeight / 2 + textWidth / 2).toFloat(), mMiddleTextPaint)
             }
             y += DEFAULT_ITEM_HEIGHT + gap
         }
