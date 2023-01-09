@@ -9,12 +9,12 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.ViewConfiguration
 import android.widget.LinearLayout
-import java.util.*
 
 private const val DEFAULT_ITEM_HEIGHT = 80
-private const val TEXT_GAP = 30
-
+private const val DEFAULT_ITEM_COUNT = 5
 class CustomNumberPicker : LinearLayout {
+    private var gap = 30
+
     private var mInitOffset: Int = 0
     private var mCurrentScrollOffset = 0
     private val mTextPaint = Paint()
@@ -41,14 +41,37 @@ class CustomNumberPicker : LinearLayout {
         var y = mCurrentScrollOffset
         for (num in mNumbers) {
             canvas.drawText(num.toString(), x.toFloat(), y.toFloat(), mTextPaint)
-            y += DEFAULT_ITEM_HEIGHT + TEXT_GAP
+            y += DEFAULT_ITEM_HEIGHT + gap
         }
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         super.onLayout(changed, l, t, r, b)
-        mInitOffset = DEFAULT_ITEM_HEIGHT + TEXT_GAP.also { mCurrentScrollOffset = it }
+        mInitOffset = DEFAULT_ITEM_HEIGHT + gap.also { mCurrentScrollOffset = it }
         Log.d("yyz", "#onLayout mInitOffset: $mInitOffset")
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        setMeasuredDimension(measureWidth(suggestedMinimumWidth, widthMeasureSpec),
+            measureHeight(suggestedMinimumHeight, heightMeasureSpec))
+    }
+
+    private fun measureHeight(defaultHeight: Int, heightMeasureSpec: Int): Int {
+        TODO("Not yet implemented")
+    }
+
+    private fun measureWidth(defaultWidth: Int, widthMeasureSpec: Int): Int {
+        var defaultW: Int
+        val specMode = MeasureSpec.getMode(widthMeasureSpec)
+        val specSize = MeasureSpec.getSize(widthMeasureSpec)
+        Log.d("yyz", "specMode: $specMode, specSize: $specSize")
+        when (specMode) {
+            MeasureSpec.EXACTLY -> defaultW = specSize
+            //Should be replaced with Kotlin function
+            //MeasureSpec.UNSPECIFIED -> defaultW = Math.max(defaultWidth, specSize)
+            MeasureSpec.UNSPECIFIED -> defaultW = defaultWidth.coerceAtLeast(specSize)
+        }
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
@@ -84,13 +107,13 @@ class CustomNumberPicker : LinearLayout {
         super.scrollBy(x, y)
         Log.d("yyz", "y: $y, mCurrentScrollOffset: $mCurrentScrollOffset, mInitOffset: $mInitOffset, mCurrentScrollOffset - mInitOffset: ${mCurrentScrollOffset - mInitOffset}")
         if (y > 0) {
-            if (mCurrentScrollOffset - mInitOffset > DEFAULT_ITEM_HEIGHT + TEXT_GAP) {
+            if (mCurrentScrollOffset - mInitOffset > DEFAULT_ITEM_HEIGHT + gap) {
                 decreaseNum()
             }
         } else {
             //y < 0是往上翻,向下滚动,mCurrentScrollOffset(手指滑动距离,上+下-)减小(+->-)
             //if (mCurrentScrollOffset - mInitOffset > DEFAULT_ITEM_HEIGHT + TEXT_GAP) {
-            if (mInitOffset - mCurrentScrollOffset > DEFAULT_ITEM_HEIGHT + TEXT_GAP) {
+            if (mInitOffset - mCurrentScrollOffset > DEFAULT_ITEM_HEIGHT + gap) {
                 increaseNum()
             }
         }
@@ -108,6 +131,7 @@ class CustomNumberPicker : LinearLayout {
         //#1优化后#increaseNum mNumbers.contentToString(): [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1, 1]
         Log.d("yyz", "#increaseNum mNumbers.contentToString(): ${mNumbers.contentToString()}")
     }
+
 
     private fun decreaseNum() {
         val end = mNumbers[mNumbers.size - 1]
