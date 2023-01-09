@@ -12,8 +12,13 @@ import android.widget.LinearLayout
 
 private const val DEFAULT_ITEM_HEIGHT = 80
 private const val DEFAULT_ITEM_COUNT = 5
+private const val TEXT_SIZE = 50f
+//private const val MIDDLE_TEXT_SIZE = 50f
+private const val MIDDLE_TEXT_SCALE = 1.5f
+
 class CustomNumberPicker : LinearLayout {
     private var gap = 30
+    private val middle_item_index = (DEFAULT_ITEM_COUNT - 1) / 2
 
     private var mMaxValue = 12
     private var mMinValue = 0
@@ -21,6 +26,7 @@ class CustomNumberPicker : LinearLayout {
     private var mInitOffset: Int = 0
     private var mCurrentScrollOffset = 0
     private val mTextPaint = Paint()
+    private var mMiddleTextPaint = Paint()
     private var mTouchSlop = 0
     private val mNumbers = arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 
@@ -48,6 +54,11 @@ class CustomNumberPicker : LinearLayout {
             color = Color.BLACK
             textSize = 50f
         }
+        mMiddleTextPaint.apply {
+            isAntiAlias = true
+            color = Color.BLACK
+            textSize = TEXT_SIZE * MIDDLE_TEXT_SCALE
+        }
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -55,10 +66,19 @@ class CustomNumberPicker : LinearLayout {
         val x = mWidth / 2
         var y = mCurrentScrollOffset
         val gap = (mHeight - DEFAULT_ITEM_HEIGHT * DEFAULT_ITEM_COUNT) / (DEFAULT_ITEM_COUNT - 1)
-        for (num in mNumbers) {
+        /*for (num in mNumbers) {
             canvas.drawText(num.toString(), x.toFloat(), y.toFloat(), mTextPaint)
             y += DEFAULT_ITEM_HEIGHT + gap
+        }*/
+        for (index in mNumbers.indices) {
+            if (index != middle_item_index) {
+                canvas.drawText(mNumbers[index].toString(), x.toFloat(), y.toFloat(), mTextPaint)
+            } else {
+                canvas.drawText(mNumbers[index].toString(), x.toFloat(), y.toFloat(), mMiddleTextPaint)
+            }
+            y += DEFAULT_ITEM_HEIGHT + gap
         }
+
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
